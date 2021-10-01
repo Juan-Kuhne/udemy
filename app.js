@@ -59,6 +59,34 @@ angularApp.controller('mainController', ['$scope', '$log', '$filter','$http', '$
     
     $log.log(nameService.name)
     $log.log(nameService.namelength())
+
+    $scope.people = [
+        {
+            name: 'John Doe',
+            address: '555 Main St.',
+            city: 'New York',
+            state: 'NY',
+            zip: '11111'
+        },
+        {
+            name: 'Jane Doe',
+            address: '333 Second St.',
+            city: 'Buffalo',
+            state: 'NY',
+            zip: '22222'
+        },
+        {
+            name: 'James Doe',
+            address: '111 Third St.',
+            city: 'Miami',
+            state: 'FL',
+            zip: '33333'
+        }
+    ]
+
+    $scope.formattedAddress = (person) => {
+        return person.address+', '+ person.city+', '+ person.state+', '+ person.zip
+    }
 }])
 
 angularApp.controller('secondController', ['$scope', '$routeParams', 'nameService', function ($scope, $routeParams, nameService) {
@@ -69,3 +97,18 @@ angularApp.controller('secondController', ['$scope', '$routeParams', 'nameServic
 
     $scope.num = $routeParams.num || 1
 }])
+
+angularApp.directive('searchResult', function() {
+    return {
+        restrict: 'EACM', //restringe o uso da diretriz para chamadas de elementos(E), atributos(A), classes(C) e comentários (M) *opcional, omitir um dos parametros o restringe. Por padrão permite todos*
+        templateUrl: 'directives/searchresult.html',
+        replace: true, //substitui o elemento que referencia a diretriz
+        scope: { //isola o escopo da diretriz do escopo do controller
+            personName: '@', //@ para strings
+            personAddress: '@',
+            personObject: '=', //= para objetos
+            formattedAddressFunction: '&' // & para funções
+        },
+        transclude: true
+    }
+})

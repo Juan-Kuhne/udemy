@@ -79,7 +79,23 @@
                 Price: {{activity.price}} <br>
                 Accessibility: {{activity.accessibility}}
             </div>
-            <!-- {"activity":"Visit a nearby museum","type":"recreational","participants":1,"price":0.2,"link":"","key":"5490351","accessibility":0.7} -->
+            <div class="caixa">
+                <label for="inputSearch">Search</label>
+                <input type="text" name="inputSearch" value="Doe">
+                <h3>Search Results</h3>
+
+                <div class="list-group" ng-repeat="person in people">
+                    <search-result person-name="{{ person.name }}" person-address="{{person.address}}"
+                        person-object="person" formatted-address-function="formattedAddress(aperson)">
+                        *Search results my not be valid
+                    </search-result>
+                    <div search-result person-name="{{ person.name }}" person-address="{{person.address}}"
+                        person-object="person" formatted-address-function="formattedAddress(aperson)"></div>
+                    <div class="search-result" person-name="{{ person.name }}" person-address="{{person.address}}"
+                        person-object="person" formatted-address-function="formattedAddress(aperson)"></div>
+                    <!-- directive:search-result -->
+                </div>
+            </div>
         </div>
     </div>
 
