@@ -48,9 +48,11 @@
       .item {
          display: flex;
          gap: 86px;
+         transition: all .5s ease-in-out;
       }
 
       img {
+         width: 200px;
          height: 200px;
          border-radius: 8px;
          transform: scale(1.5);
@@ -131,12 +133,17 @@
       .dot--fill {
          background-color: #087f5b;
       }
+
+      .hidden {
+         display: none;
+      }
    </style>
 </head>
 
 <body>
    <div class="carousel">
-      <div class="item item1">
+
+      <div class="item">
          <img src="maria.jpg" alt="Maria de Almeida">
          <blockquote class="testimonial">
             <p class="testimonial-text">
@@ -149,24 +156,127 @@
          </blockquote>
       </div>
 
-      <button class="btn btn--left">
+      <div class="item hidden">
+         <img src="../05-Design/chair-1.jpg" alt="Almeida de Maria">
+         <blockquote class="testimonial">
+            <p class="testimonial-text">
+               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dolorum eligendi rerum! Aliquid officiis
+               atque
+               temporibus facere illum, minus magni, totam porro, aperiam nobis alias consectetur non harum!"
+            </p>
+            <p class="testimonial-author">Almeida de Maria</p>
+            <p class="testimonial-job">Product Manager as Senior EDP Comercial</p>
+         </blockquote>
+      </div>
+
+      <div class="item hidden">
+         <img src="https://trackercdn.com/legacycdn/fortnite/9AB35270_large.png" alt="Joaquim Tiralasca"
+            style="background-color: lightsteelblue;">
+         <blockquote class="testimonial">
+            <p class="testimonial-text">
+               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dolorum eligendi rerum! Aliquid officiis
+               atque
+               temporibus facere illum, minus magni, totam porro, aperiam nobis alias consectetur non harum!"
+            </p>
+            <p class="testimonial-author">Joaquim Tiralasca</p>
+            <p class="testimonial-job">Profiteer as EDP Comercial</p>
+         </blockquote>
+      </div>
+
+      <div class="item hidden">
+         <img src="https://www.omachoalpha.com.br/wp-content/uploads/2017/04/compras.jpg" alt="Abraão Charrete">
+         <blockquote class="testimonial">
+            <p class="testimonial-text">
+               "Lorem ipsum dolor sit amet consectetur adipisicing elit. Id dolorum eligendi rerum! Aliquid officiis
+               atque
+               temporibus facere illum, minus magni, totam porro, aperiam nobis alias consectetur non harum!"
+            </p>
+            <p class="testimonial-author">Abraão Charrete</p>
+            <p class="testimonial-job">Drudge as EDP Comercial</p>
+         </blockquote>
+      </div>
+
+      <button class="btn btn--left" onclick="pass(-1)">
          <svg xmlns="http://www.w3.org/2000/svg" class="btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
          </svg>
       </button>
-      <button class="btn btn--right">
+      <button class="btn btn--right" onclick="pass(1)">
          <svg xmlns="http://www.w3.org/2000/svg" class="btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
          </svg>
       </button>
 
       <div class="dots">
-         <button class="dot dot--fill">&nbsp;</button>
-         <button class="dot">&nbsp;</button>
-         <button class="dot">&nbsp;</button>
-         <button class="dot">&nbsp;</button>
+         <button class="dot dot--fill" onclick="select(0)">&nbsp;</button>
+         <button class="dot" onclick="select(1)">&nbsp;</button>
+         <button class="dot" onclick="select(2)">&nbsp;</button>
+         <button class="dot" onclick="select(3)">&nbsp;</button>
       </div>
    </div>
+
+   <script>
+      let items = document.querySelectorAll('.item')
+      let dots = document.querySelectorAll('.dot')
+
+      function pass(direction) {
+         const notHidden = locate()
+         if (direction > 0 && notHidden < 3) {
+            // items[notHidden].classList.toggle('hidden')
+            // items[notHidden + 1].classList.toggle('hidden')
+            // dots[notHidden].classList.toggle('dot--fill')
+            // dots[notHidden + 1].classList.toggle('dot--fill')
+
+            toggle(notHidden, notHidden + 1)
+         } else if (direction > 0 && notHidden == 3) {
+            // items[notHidden].classList.toggle('hidden')
+            // items[0].classList.toggle('hidden')
+            // dots[notHidden].classList.toggle('dot--fill')
+            // dots[0].classList.toggle('dot--fill')
+
+            toggle(notHidden, 0)
+         } else if (direction < 0 && notHidden > 0) {
+            // items[notHidden].classList.toggle('hidden')
+            // items[notHidden - 1].classList.toggle('hidden')
+            // dots[notHidden].classList.toggle('dot--fill')
+            // dots[notHidden - 1].classList.toggle('dot--fill')
+
+            toggle(notHidden, notHidden - 1)
+         } else if (direction < 0 && notHidden == 0) {
+            // items[notHidden].classList.toggle('hidden')
+            // items[3].classList.toggle('hidden')
+            // dots[notHidden].classList.toggle('dot--fill')
+            // dots[3].classList.toggle('dot--fill')
+
+            toggle(notHidden, 3)
+         }
+      }
+
+      function select(num) {
+         const notHidden = locate()
+         if (!dots[num].classList.contains('dot--fill')) {
+            items[notHidden].classList.toggle('hidden')
+            items[num].classList.toggle('hidden')
+            dots[notHidden].classList.toggle('dot--fill')
+            dots[num].classList.toggle('dot--fill')
+         }
+      }
+
+      function locate() {
+         for (let i = 0; i < items.length; i++) {
+            if (!items[i].classList.contains('hidden')) {
+               return i
+            }
+         }
+      }
+
+      function toggle(toHide, toShow) {
+         items[toHide].classList.toggle('hidden')
+         items[toShow].classList.toggle('hidden')
+         dots[toHide].classList.toggle('dot--fill')
+         dots[toShow].classList.toggle('dot--fill')
+      }
+   </script>
 </body>
 
 </html>
