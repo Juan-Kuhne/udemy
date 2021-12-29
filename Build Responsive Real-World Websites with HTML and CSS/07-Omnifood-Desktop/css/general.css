@@ -28,7 +28,10 @@ Paragraph default: 1.6
 #ffdec4
 #ffc498
 
-- Shades: #cf711f
+- Shades: 
+#cf711f
+#45260a
+
 - Accents: 
 - Greys:
 #6f6f6f 
@@ -140,10 +143,11 @@ body {
   letter-spacing: 0.75px;
 }
 
+.btn,
 .btn:link,
 .btn:visited {
   display: inline-block;
-  background-color: #e67e22;
+  font-family: inherit;
   font-size: 2rem;
   font-weight: 600;
   color: #fff;
@@ -151,6 +155,10 @@ body {
   border-radius: 9px;
   text-decoration: none;
   transition: background-color 0.3s, box-shadow 0.3s;
+
+  /* Only necessary for .btn */
+  border: none;
+  cursor: pointer;
 }
 
 .btn--full:link,
@@ -176,6 +184,18 @@ body {
   background-color: #ffdec4;
   /* border: 3px solid #fff; */
   box-shadow: inset 0 0 0 3px #fff; /* Trick to add border inside */
+}
+
+.btn-form {
+  background-color: #45260a;
+  color: #fdf2e9;
+  align-self: end;
+  padding: 1.2rem;
+}
+
+.btn-form:hover {
+  background-color: #fff;
+  color: #555;
 }
 
 .link:link,
@@ -211,6 +231,13 @@ body {
 .list-icon {
   font-size: 3rem;
   color: #e67e22;
+}
+
+*:focus {
+  outline: none;
+  /* outline: 4px dotted #e67e22;
+  outline-offset: 8px; */
+  box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.5);
 }
 
 /* HELPER/SETTINGS CLASSES */
