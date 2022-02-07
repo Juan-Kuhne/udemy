@@ -45,6 +45,9 @@ const restaurant = {
    },
 };
 
+/* 
+/////////////////////////////////////////////////////
+// Logical assignment operators
 const rest1 = {
    name: 'Capri',
    // numGuests: 20,
@@ -74,6 +77,7 @@ rest2.owner &&= '<ANONYMOUS>';
 
 console.log(rest1);
 console.log(rest2);
+ */
 
 /* 
 ////////////////////////////////////////////////////
