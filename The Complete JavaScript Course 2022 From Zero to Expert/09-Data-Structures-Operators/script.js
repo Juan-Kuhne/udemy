@@ -49,6 +49,9 @@ const restaurant = {
    },
 };
 
+/* 
+/////////////////////////////////////////////////////////////////
+// Maps: Iteration
 const question = new Map([
    ['question', 'What is the best programming language in the world?'],
    [1, 'C'],
@@ -80,7 +83,7 @@ console.log(question.get(answer === question.get('correct')));
 console.log([...question]);
 console.log(question.entries());
 console.log(...question.keys());
-console.log(question.values());
+console.log(question.values()); */
 
 /* 
 ///////////////////////////////////////////////////////////
