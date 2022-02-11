@@ -213,6 +213,7 @@ runOnce();
 
 (() => console.log('This will ALSO never run again'))(); */
 
+/* 
 //////////////////////////////////////////////////////////////
 // Closures
 
@@ -270,4 +271,4 @@ const boardPassengers = function (n, wait) {
 };
 
 const perGroup = 1000;
-boardPassengers(180, 3);
+boardPassengers(180, 3); */
