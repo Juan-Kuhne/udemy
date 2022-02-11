@@ -105,6 +105,7 @@ greeterHey('Steven');
 
 greet('Hello')('Jonas'); */
 
+/* 
 //////////////////////////////////////////////////////////////////////////
 // The call and apply methods
 const lufthansa = {
@@ -196,4 +197,17 @@ console.log(addVAT(23));
 const addtaxrate = rate => value => addTax(rate, value);
 const addVAT2 = addtaxrate(0.23);
 console.log(addVAT2(100));
-console.log(addVAT2(23));
+console.log(addVAT2(23)); */
+
+//////////////////////////////////////////////////////////
+// Immediately invoked function expressions
+const runOnce = function () {
+   console.log('This will never run again');
+};
+runOnce();
+
+(function () {
+   console.log('This will never run again');
+})();
+
+(() => console.log('This will ALSO never run again'))();
