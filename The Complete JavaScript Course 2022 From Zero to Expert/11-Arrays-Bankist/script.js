@@ -75,6 +75,9 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
+/* 
+// Simple array methods
+
 let arr = ['a', 'b', 'c', 'd', 'e'];
 
 console.log(arr.slice(2));
@@ -104,4 +107,18 @@ console.log(letters);
 console.log([...arr, ...arr2]);
 
 // JOIN
-console.log(letters.join(' - '));
+console.log(letters.join(' - ')); */
+
+/////////////////////////////////////////////////////
+// The at method
+
+const arr = [23, 11, 64];
+console.log(arr[0]);
+console.log(arr.at(0));
+
+console.log(arr[arr.length - 1]);
+console.log(arr.slice(-1)[0]);
+console.log(arr.at(-1));
+
+console.log('jonas'.at(0));
+console.log('jonas'.at(-1));
