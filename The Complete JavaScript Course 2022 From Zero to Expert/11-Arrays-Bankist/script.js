@@ -177,3 +177,18 @@ console.log(currenciesUnique);
 currenciesUnique.forEach(function (value, _, set) {
    console.log(`${_}: ${value}`);
 }); */
+
+//////////////////////////////////////////////////////
+// The map method
+
+const eurToUsd = 1.1;
+// const movementsUsd = movements.map(mov => {
+//    return mov * eurToUsd;
+// });
+const movementsUsd = movements.map(mov => mov * eurToUsd);
+
+console.log(movements);
+console.log(movementsUsd);
+
+const movementsDescriptions = movements.map((mov, i, arr) => `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`);
+console.log(movementsDescriptions);
