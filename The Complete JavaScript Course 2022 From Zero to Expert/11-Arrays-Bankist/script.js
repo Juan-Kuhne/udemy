@@ -109,6 +109,7 @@ console.log([...arr, ...arr2]);
 // JOIN
 console.log(letters.join(' - ')); */
 
+/* 
 /////////////////////////////////////////////////////
 // The at method
 
@@ -121,4 +122,26 @@ console.log(arr.slice(-1)[0]);
 console.log(arr.at(-1));
 
 console.log('jonas'.at(0));
-console.log('jonas'.at(-1));
+console.log('jonas'.at(-1)); */
+
+//////////////////////////////////////////////////////
+// Looping arrays: foreach
+
+console.log('---- FOROF ----');
+// for (const movement of movements) {
+for (const [i, movement] of movements.entries()) {
+   if (movement > 0) {
+      console.log(`Movement ${i + 1}: You deposited ${movement}`);
+   } else {
+      console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+   }
+}
+
+console.log('---- FOREACH ----');
+movements.forEach(function (movement, index, array) {
+   if (movement > 0) {
+      console.log(`Movement ${index + 1}: You deposited ${movement}`);
+   } else {
+      console.log(`Movement ${index + 1}: You withdrew ${Math.abs(movement)}`);
+   }
+});
