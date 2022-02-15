@@ -76,6 +76,18 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+const createUsernames = accs => {
+   accs.forEach(acc => {
+      acc.username = acc.owner
+         .toLowerCase()
+         .split(' ')
+         .map(name => name[0])
+         .join('');
+   });
+};
+
+createUsernames(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -178,6 +190,7 @@ currenciesUnique.forEach(function (value, _, set) {
    console.log(`${_}: ${value}`);
 }); */
 
+/* 
 //////////////////////////////////////////////////////
 // The map method
 
@@ -191,4 +204,4 @@ console.log(movements);
 console.log(movementsUsd);
 
 const movementsDescriptions = movements.map((mov, i, arr) => `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`);
-console.log(movementsDescriptions);
+console.log(movementsDescriptions); */
