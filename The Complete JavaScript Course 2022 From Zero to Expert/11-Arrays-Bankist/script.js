@@ -124,24 +124,40 @@ console.log(arr.at(-1));
 console.log('jonas'.at(0));
 console.log('jonas'.at(-1)); */
 
+/* 
 //////////////////////////////////////////////////////
 // Looping arrays: foreach
 
 console.log('---- FOROF ----');
 // for (const movement of movements) {
-for (const [i, movement] of movements.entries()) {
-   if (movement > 0) {
+  for (const [i, movement] of movements.entries()) {
+    if (movement > 0) {
       console.log(`Movement ${i + 1}: You deposited ${movement}`);
-   } else {
+    } else {
       console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
    }
 }
 
 console.log('---- FOREACH ----');
 movements.forEach(function (movement, index, array) {
-   if (movement > 0) {
-      console.log(`Movement ${index + 1}: You deposited ${movement}`);
-   } else {
-      console.log(`Movement ${index + 1}: You withdrew ${Math.abs(movement)}`);
-   }
+  if (movement > 0) {
+    console.log(`Movement ${index + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${index + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+}); */
+
+//////////////////////////////////////////////////////
+// forEach with maps and sets
+
+// Map
+currencies.forEach(function (value, key, map) {
+   console.log(`${key}: ${value}`);
+});
+
+// Set
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+console.log(currenciesUnique);
+currenciesUnique.forEach(function (value, _, set) {
+   console.log(`${_}: ${value}`);
 });
