@@ -196,12 +196,24 @@ currenciesUnique.forEach(function (value, _, set) {
 
 const eurToUsd = 1.1;
 // const movementsUsd = movements.map(mov => {
-//    return mov * eurToUsd;
-// });
-const movementsUsd = movements.map(mov => mov * eurToUsd);
+  //    return mov * eurToUsd;
+  // });
+  const movementsUsd = movements.map(mov => mov * eurToUsd);
 
 console.log(movements);
 console.log(movementsUsd);
 
 const movementsDescriptions = movements.map((mov, i, arr) => `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`);
 console.log(movementsDescriptions); */
+
+//////////////////////////////////////////////////////
+// The filter method
+
+const deposits = movements.filter(function (mov, i, arr) {
+   return mov > 0;
+});
+const withdrawals = movements.filter(mov => mov < 0);
+
+console.log(movements);
+console.log(deposits);
+console.log(withdrawals);
