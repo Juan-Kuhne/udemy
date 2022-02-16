@@ -259,13 +259,25 @@ console.log(balance);
 const max = movements.reduce((acc, mov) => (mov > acc ? mov : acc), movements[0]);
 
 console.log(max); */
-
+/* 
 //////////////////////////////////////////////////////
 // Chaining methods
 
 const eurToUsd = 1.1;
 const totalDepositsUSD = movements
-   .filter(mov => mov > 0)
-   .map(mov => mov * eurToUsd)
-   .reduce((acc, mov) => acc + mov, 0);
-console.log(totalDepositsUSD);
+.filter(mov => mov > 0)
+.map(mov => mov * eurToUsd)
+.reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositsUSD); */
+
+//////////////////////////////////////////////////////
+// The find method
+
+const firstWithdrawal = movements.find(mov => mov < 0);
+console.log(movements);
+console.log(firstWithdrawal);
+
+console.log(accounts);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
