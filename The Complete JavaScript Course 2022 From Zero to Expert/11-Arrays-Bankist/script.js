@@ -359,6 +359,7 @@ console.log(accounts);
 const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(account); */
 
+/* 
 //////////////////////////////////////////////////////
 // some and every methods
 
@@ -381,4 +382,25 @@ console.log(account4.movements.every(mov => mov > 0));
 const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
-console.log(movements.filter(deposit));
+console.log(movements.filter(deposit)); */
+
+//////////////////////////////////////////////////////
+// flat and flatMap methods
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2)); // the argument select the deep level
+
+// flat
+const overalBalance = accounts
+   .map(acc => acc.movements)
+   .flat()
+   .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
+
+// flatMap
+const overalBalance2 = accounts
+   .flatMap(acc => acc.movements) //only goes 1 level deep
+   .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
