@@ -61,15 +61,18 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
    containerMovements.innerHTML = '';
 
-   movements.forEach(function (mov, i) {
+   const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+   movs.forEach(function (mov, i) {
       const type = mov > 0 ? 'deposit' : 'withdrawal';
-      const html = `<div class="movements__row">
-      <div class="movements__type movements__type--${type}">${i} ${type}</div>
-      <div class="movements__value">${mov}€</div>
-    </div>`;
+      const html = `
+      <div class="movements__row">
+         <div class="movements__type movements__type--${type}">${i} ${type}</div>
+         <div class="movements__value">${mov}€</div>
+      </div>`;
 
       containerMovements.insertAdjacentHTML('afterBegin', html);
    });
@@ -184,6 +187,14 @@ btnClose.addEventListener('click', function (e) {
    }
    inputCloseUsername.value = inputClosePin.value = '';
    labelWelcome.textContent = 'Log in to get started';
+});
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+   e.preventDefault();
+
+   displayMovements(currentAccount.movements, !sorted);
+   sorted = !sorted;
 });
 
 /////////////////////////////////////////////////
@@ -384,6 +395,7 @@ console.log(movements.some(deposit));
 console.log(movements.every(deposit));
 console.log(movements.filter(deposit)); */
 
+/* 
 //////////////////////////////////////////////////////
 // flat and flatMap methods
 const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
@@ -394,13 +406,42 @@ console.log(arrDeep.flat(2)); // the argument select the deep level
 
 // flat
 const overalBalance = accounts
-   .map(acc => acc.movements)
-   .flat()
+.map(acc => acc.movements)
+.flat()
    .reduce((acc, mov) => acc + mov, 0);
-console.log(overalBalance);
+   console.log(overalBalance);
 
 // flatMap
 const overalBalance2 = accounts
    .flatMap(acc => acc.movements) //only goes 1 level deep
    .reduce((acc, mov) => acc + mov, 0);
-console.log(overalBalance);
+   console.log(overalBalance); */
+
+//////////////////////////////////////////////////////
+// sorting arrays
+
+// Strings
+const owners = ['Jonas', 'Zack', 'Adam', 'Martha'];
+console.log(owners.sort());
+console.log(owners);
+
+// Numbers
+console.log(movements);
+// if return < 0 => A, B (keep order)
+// if return > 0 => B, A (switch order)
+
+// Ascending
+// movements.sort((a, b) => {
+//    if (a > b) return 1;
+//    if (b > a) return -1;
+// });
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// Descending
+// movements.sort((a, b) => {
+//    if (a > b) return -1;
+//    if (b > a) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
