@@ -335,6 +335,7 @@ labelBalance.addEventListener('click', function (e) {
   });
 }); */
 
+/* 
 /////////////////////////////////////////////////
 // Numeric separators
 
@@ -353,4 +354,38 @@ const PI = 3.14_15;
 console.log(PI);
 
 console.log(Number('230_000'));
-console.log(parseInt('230_000'));
+console.log(parseInt('230_000')); */
+
+/////////////////////////////////////////////////
+// Working with bigInt
+
+console.log(2 ** 53 - 1);
+console.log(Number.MAX_SAFE_INTEGER);
+console.log(2 ** 53 + 1);
+console.log(2 ** 53 + 2);
+console.log(2 ** 53 + 3);
+console.log(2 ** 53 + 4);
+
+console.log(65164165465498165465219841265465);
+console.log(65164165465498165465219841265465n);
+console.log(BigInt(65164165465498165465219841265465));
+
+// Operators
+console.log(10000n + 10000n);
+console.log(65168541654684n * 15616846548484n);
+// console.log(Math.sqrt(16n));
+
+const huge = 35151684635484654816385465n;
+const num = 23;
+// console.log(huge * num);
+console.log(huge * BigInt(num));
+
+console.log(20n > 15);
+console.log(20n === 20);
+console.log(20n == 20);
+
+console.log(huge + ' is REALLY big!!!');
+
+// Divisions
+console.log(10n / 3n);
+console.log(10 / 3);
