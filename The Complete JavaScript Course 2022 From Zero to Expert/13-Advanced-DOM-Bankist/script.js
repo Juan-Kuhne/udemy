@@ -447,6 +447,7 @@ console.log(h1.parentElement.children);
    if (el !== h1) el.style.transform = 'scale(0.5)';
 }); */
 
+/* 
 ////////////////////////////////////////////
 // Lifecycle DOM events
 
@@ -462,4 +463,4 @@ window.addEventListener('load', function (e) {
 //    e.preventDefault(); // some browser require it
 //    console.log(e);
 //    e.returnValue = '';
-// });
+// }); */
