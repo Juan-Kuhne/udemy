@@ -86,6 +86,7 @@ class PersonCl {
       this.birthYear = birthYear;
    }
 
+   // Instance methods
    // Methods will be added to .prototype property
    calcAge() {
       console.log(2037 - this.birthYear);
@@ -107,6 +108,12 @@ class PersonCl {
    get fullName() {
       return this._fullName;
    }
+
+   // Static method
+   static hey() {
+      console.log('Hey there 👋🏻');
+      console.log(this);
+   }
 }
 
 const jessica = new PersonCl('Jessica Davis', 1996);
@@ -127,10 +134,15 @@ jessica.greet();
 
 const walter = new PersonCl('Walter White', 1965);
 
+// PersonCl.hey();
+
+/* 
+/////////////////////////////////////////////////////
+// Getters and setters
 const account = {
    owner: 'jonas',
    movements: [200, 530, 120, 300],
-
+   
    get latest() {
       return this.movements.slice(-1).pop();
    },
@@ -141,5 +153,28 @@ const account = {
 };
 
 console.log(account.latest); // getter
-account.latest = 50;
-console.log(account.movements); // setter
+account.latest = 50; // setter
+console.log(account.movements); */
+
+const PersonProto = {
+   calcAge() {
+      console.log(2037 - this.birthYear);
+   },
+
+   init(firstName, birthYear) {
+      this.firstName = firstName;
+      this.birthYear = birthYear;
+   },
+};
+
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name = 'Steven';
+steven.birthYear = 2002;
+steven.calcAge();
+
+console.log(steven.__proto__ === PersonProto);
+
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 1979);
+sarah.calcAge();
