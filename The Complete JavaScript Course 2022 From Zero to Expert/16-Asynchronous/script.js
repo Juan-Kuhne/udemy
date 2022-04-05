@@ -62,7 +62,7 @@ const renderCountry = function (data, className = '') {
    countriesContainer.insertAdjacentHTML('beforeend', html);
    countriesContainer.style.opacity = 1;
 };
-
+/* 
 const getCountryAndNeighbour = function (country) {
    // AJAX call country 1
    const request = new XMLHttpRequest();
@@ -98,3 +98,10 @@ const getCountryAndNeighbour = function (country) {
 
 // getCountryAndNeighbour('portugal');
 getCountryAndNeighbour('german');
+ */
+
+///////////////////////////////////////////////////////////////////////////
+// Promises and the Fetch API
+
+const request = fetch(`https://restcountries.com/v3.1/name/portugal`);
+console.log(request);
