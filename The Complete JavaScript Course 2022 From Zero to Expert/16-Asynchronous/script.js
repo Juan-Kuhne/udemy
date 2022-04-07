@@ -165,7 +165,7 @@ console.log('Test end');
 
 /////////////////////////////////////////////////////////////////////////
 // Bilding a simple promise
-
+/* 
 const lotteryPromise = new Promise(function (resolve, reject) {
    console.log('Lottery draw is happening.');
    setTimeout(() => {
@@ -187,8 +187,42 @@ const wait = function (seconds) {
 };
 
 wait(2)
-   .then(() => {
+.then(() => {
       console.log('I waited 2 seconds');
       return wait(1);
    })
    .then(() => console.log('I waited 1 second'));
+ */
+
+/////////////////////////////////////////////////////////////////////////
+// Promisifying the geolocation API
+
+const getPosition = function () {
+   return new Promise(function (resolve, reject) {
+      // navigator.geolocation.getCurrentPosition(
+      //    position => resolve(position),
+      //    err => reject(err)
+      // );
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+   });
+};
+
+// Coding challenge 01 code
+const whereAmI = function () {
+   getPosition()
+      .then(pos => {
+         const { latitude: lat, longitude: lng } = pos.coords;
+         return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=356490792968261623635x121369`);
+      })
+      .then(response => {
+         if (!response.ok) throw new Error(`Couldn't search ... ${response.status}`);
+         return response.json();
+      })
+      .then(data => {
+         console.log(data);
+         console.log(`You are in ${data.city}, ${data.country}`);
+         getCountryData(data.country.toLowerCase());
+      })
+      .catch(err => console.error(`Something went wrong ... ${err}`));
+};
+whereAmI(-33.933, 18.474);
