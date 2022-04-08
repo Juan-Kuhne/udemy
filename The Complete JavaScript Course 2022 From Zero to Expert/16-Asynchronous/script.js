@@ -196,25 +196,25 @@ wait(2)
 
 /////////////////////////////////////////////////////////////////////////
 // Promisifying the geolocation API
-
+/* 
 const getPosition = function () {
    return new Promise(function (resolve, reject) {
       // navigator.geolocation.getCurrentPosition(
-      //    position => resolve(position),
-      //    err => reject(err)
-      // );
-      navigator.geolocation.getCurrentPosition(resolve, reject);
+         //    position => resolve(position),
+         //    err => reject(err)
+         // );
+         navigator.geolocation.getCurrentPosition(resolve, reject);
    });
 };
 
 // Coding challenge 01 code
 const whereAmI = function () {
    getPosition()
-      .then(pos => {
-         const { latitude: lat, longitude: lng } = pos.coords;
-         return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=356490792968261623635x121369`);
-      })
-      .then(response => {
+   .then(pos => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+      return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=356490792968261623635x121369`);
+   })
+   .then(response => {
          if (!response.ok) throw new Error(`Couldn't search ... ${response.status}`);
          return response.json();
       })
@@ -226,3 +226,32 @@ const whereAmI = function () {
       .catch(err => console.error(`Something went wrong ... ${err}`));
 };
 whereAmI(-33.933, 18.474);
+*/
+
+/////////////////////////////////////////////////////////////////////////
+// Async/Await
+
+const getPosition = function () {
+   return new Promise(function (resolve, reject) {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+   });
+};
+
+const whereAmI = async function () {
+   // Geolocation
+   const pos = await getPosition();
+   const { latitude: lat, longitude: lng } = pos.coords;
+
+   // Reverse geocoding
+   const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=356490792968261623635x121369`);
+   const dataGeo = await resGeo.json();
+
+   // Country data
+   const res = await fetch(`https://restcountries.com/v3.1/name/${dataGeo.country}`);
+   const data = await res.json();
+   renderCountry(data[0]);
+   countriesContainer.style.opacity = 1;
+};
+
+whereAmI();
+console.log('FIRST');
