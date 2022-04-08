@@ -19,18 +19,43 @@ const createImage = function (imgPath) {
    });
 };
 
+// createImage('img/img-1.jpg')
+//    .then(el => {
+//       wait(2).then(() => {
+//          el.style.display = 'none';
+//          createImage('img/img-2.jpg').then(el => {
+//             wait(2).then(() => {
+//                el.style.display = 'none';
+//                createImage('img/img-3.jpg').then(el => {
+//                   wait(2).then(() => (el.style.display = 'none'));
+//                });
+//             });
+//          });
+//       });
+//    })
+//    .catch(err => console.error(err));
+
 createImage('img/img-1.jpg')
-   .then(el => {
-      wait(2).then(() => {
-         el.style.display = 'none';
-         createImage('img/img-2.jpg').then(el => {
-            wait(2).then(() => {
-               el.style.display = 'none';
-               createImage('img/img-3.jpg').then(el => {
-                  wait(2).then(() => (el.style.display = 'none'));
-               });
-            });
-         });
-      });
+   .then(img => {
+      curImg = img;
+      return wait(2);
    })
-   .catch(err => console.error(err));
+   .then(() => {
+      curImg.style.display = 'none';
+      return createImage('img/img-2.jpg');
+   })
+   .then(img => {
+      curImg = img;
+      return wait(2);
+   })
+   .then(() => {
+      curImg.style.display = 'none';
+      return createImage('img/img-3.jpg');
+   })
+   .then(img => {
+      curImg = img;
+      return wait(2);
+   })
+   .then(() => {
+      curImg.style.display = 'none';
+   });
