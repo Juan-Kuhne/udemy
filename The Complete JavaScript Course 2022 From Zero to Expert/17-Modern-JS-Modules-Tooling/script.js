@@ -95,3 +95,20 @@ console.log(stateDeepClone);
 if (module.hot) {
    module.hot.accept();
 }
+
+class Person {
+   greeting = 'Hey';
+   constructor(name) {
+      this.name;
+      console.log(`${this.greeting}, ${this.name}`);
+   }
+}
+
+const jonas = new Person('Jonas');
+console.log('Jonas' ?? null);
+
+console.log(cart.find(el => el.quantity >= 2));
+
+// import 'core-js/stable';
+import 'core-js/stable/array/find';
+import 'regenerator-runtime/runtime';
