@@ -24,8 +24,7 @@ const controlRecipes = async function () {
     // 2) Rendering recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
-    console.log(err);
-    alert('controller: ' + err.message);
+    recipeView.renderError();
   }
 };
 

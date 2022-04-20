@@ -475,8 +475,7 @@ const controlRecipes = async function() {
         // 2) Rendering recipe
         _recipeViewJsDefault.default.render(_modelJs.state.recipe);
     } catch (err) {
-        console.log(err);
-        alert('controller: ' + err.message);
+        _recipeViewJsDefault.default.renderError();
     }
 };
 const init = function() {
@@ -15244,6 +15243,7 @@ const loadRecipe = async function(id) {
     } catch (err) {
         // Temp error handling
         console.error(`💥 ${err}`);
+        throw err;
     }
 };
 
@@ -15327,6 +15327,8 @@ const iconPath = new URL(require("8817da6238904439")).href;
 class RecipeView {
     #parentElement = document.querySelector('.recipe');
     #data;
+    #errorMessage = 'We could not find that recipe. Please try another one!';
+    #message = '';
     render(data) {
         this.#data = data;
         const markup = this.#generateMarkup();
@@ -15338,7 +15340,17 @@ class RecipeView {
     }
     renderSpinner() {
         const markup = `\n   <div class="spinner">\n     <svg>\n       <use href="${iconPath}#icon-loader"></use>\n     </svg>\n   </div>\n   `;
-        this.#parentElement.innerHTML = '';
+        this.#clear();
+        this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+    renderError(message = this.#errorMessage) {
+        const markup = `\n     <div class="error">\n      <div>\n         <svg>\n            <use href="${iconPath}#icon-alert-triangle"></use>\n         </svg>\n      </div>\n      <p>${message}</p>\n      </div>\n     `;
+        this.#clear();
+        this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+    renderMessage(message = this.#errorMessage) {
+        const markup = `\n    <div class="message">\n     <div>\n        <svg>\n           <use href="${iconPath}#icon-smile"></use>\n        </svg>\n     </div>\n     <p>${message}</p>\n     </div>\n    `;
+        this.#clear();
         this.#parentElement.insertAdjacentHTML('afterbegin', markup);
     }
     addHandlerRender(handler) {
