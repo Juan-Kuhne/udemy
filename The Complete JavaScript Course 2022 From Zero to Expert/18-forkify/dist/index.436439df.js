@@ -479,13 +479,10 @@ const controlRecipes = async function() {
         alert('controller: ' + err.message);
     }
 };
-// window.addEventListener('hashchange', showRecipe);
-// window.addEventListener('load', showRecipe);
-[
-    'hashchange',
-    'load'
-].forEach((ev)=>window.addEventListener(ev, controlRecipes)
-);
+const init = function() {
+    _recipeViewJsDefault.default.addHandlerRender(controlRecipes);
+};
+init();
 
 },{"core-js/stable":"eIyVg","regenerator-runtime/runtime":"cH8Iq","./model.js":"6Yfb5","./views/recipeView.js":"9q0mt","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"eIyVg":[function(require,module,exports) {
 require('../modules/es.symbol');
@@ -15343,6 +15340,15 @@ class RecipeView {
         const markup = `\n   <div class="spinner">\n     <svg>\n       <use href="${iconPath}#icon-loader"></use>\n     </svg>\n   </div>\n   `;
         this.#parentElement.innerHTML = '';
         this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+    addHandlerRender(handler) {
+        // window.addEventListener('hashchange', showRecipe);
+        // window.addEventListener('load', showRecipe);
+        [
+            'hashchange',
+            'load'
+        ].forEach((ev)=>window.addEventListener(ev, handler)
+        );
     }
      #generateMarkup() {
         return `\n   <figure class="recipe__fig">\n     <img src="${this.#data.image}" alt="${this.#data.title}" class="recipe__img" crossorigin/>\n     <h1 class="recipe__title">\n       <span>${this.#data.title}</span>\n     </h1>\n   </figure>\n\n   <div class="recipe__details">\n     <div class="recipe__info">\n       <svg class="recipe__info-icon">\n         <use href="${iconPath}#icon-clock"></use>\n       </svg>\n       <span class="recipe__info-data recipe__info-data--minutes">${this.#data.cookingTime}</span>\n       <span class="recipe__info-text">minutes</span>\n     </div>\n     <div class="recipe__info">\n       <svg class="recipe__info-icon">\n         <use href="${iconPath}#icon-users"></use>\n       </svg>\n       <span class="recipe__info-data recipe__info-data--people">${this.#data.servings}</span>\n       <span class="recipe__info-text">servings</span>\n\n       <div class="recipe__info-buttons">\n         <button class="btn--tiny btn--increase-servings">\n           <svg>\n             <use href="${iconPath}#icon-minus-circle"></use>\n           </svg>\n         </button>\n         <button class="btn--tiny btn--increase-servings">\n           <svg>\n             <use href="${iconPath}#icon-plus-circle"></use>\n           </svg>\n         </button>\n       </div>\n     </div>\n\n     <div class="recipe__user-generated">\n       <svg>\n         <use href="${iconPath}#icon-user"></use>\n       </svg>\n     </div>\n     <button class="btn--round">\n       <svg class="">\n         <use href="${iconPath}#icon-bookmark-fill"></use>\n       </svg>\n     </button>\n   </div>\n\n   <div class="recipe__ingredients">\n     <h2 class="heading--2">Recipe ingredients</h2>\n     <ul class="recipe__ingredient-list">\n       ${this.#data.ingredients.map(this.#generateMarkupIngredient).join('')}\n     </ul>\n   </div>\n\n   <div class="recipe__directions">\n     <h2 class="heading--2">How to cook it</h2>\n     <p class="recipe__directions-text">\n       This recipe was carefully designed and tested by\n       <span class="recipe__publisher">${this.#data.publisher}</span>. Please check out\n       directions at their website.\n     </p>\n     <a\n       class="btn--small recipe__btn"\n       href="${this.#data.sourceUrl}"\n       target="_blank"\n     >\n       <span>Directions</span>\n       <svg class="search__icon">\n         <use href="${iconPath}#icon-arrow-right"></use>\n       </svg>\n     </a>\n   </div>\n   `;
